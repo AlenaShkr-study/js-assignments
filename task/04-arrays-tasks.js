@@ -275,8 +275,9 @@ function getSecondItems(arr) {
  */
 function propagateItemsByPositionIndex(arr) {
    if (arr.length === 0 || 1 ) return arr;
-   arr = arr.map((el, i) => (String(el)).repeat(i+1));
-   return arr.join('').split('');
+   /*arr = arr.map((el, i, arr) => (String(el)).repeat(i+1));
+   return arr.join('').split('');*/
+   arr.reduce((acc, cur, index,arr) => acc +arr[i-1]);
 }
 
 
@@ -313,7 +314,7 @@ function get3TopItems(arr) {
  */
 function getPositivesCount(arr) {
    if (arr.length === 0) return 0;
-   return arr.filter(el => ( el > 0)).length;
+   return arr.filter(el => (typeof(el)==='number') && (el > 0)).length;
 }
  
 /** 
@@ -440,15 +441,14 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  */
 function sortCitiesArray(arr) {
-   arr.sort(function(a, b){
+   return arr.sort(function(a, b){
       let nameA=a.country.toLowerCase(), nameB=b.country.toLowerCase()
    if (nameA < nameB) 
    return -1;
  if (nameA > nameB)
    return 1;
    return 0
-   })
-   return arr.sort((a, b)=>
+   }).sort((a, b)=>
    {if (a.country === b.country)
       {let nameA=a.city.toLowerCase(), nameB=b.city.toLowerCase()
       if (nameA < nameB) 
