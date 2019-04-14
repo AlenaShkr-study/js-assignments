@@ -200,7 +200,12 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    throw new Error('Not implemented');
+    let str1='(';
+    let strEnd = ')';
+    if (isStartIncluded) str1 = '[';
+    if (isEndIncluded) strEnd = ']';
+    if (a > b) return   str1 + b +', '+ a +strEnd;
+    return str1 + a +', '+ b +strEnd;
 }
 
 
@@ -394,7 +399,7 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    return (+num.toString(n));
 }
 
 
@@ -434,7 +439,20 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+    let rowsA = m1.length, colsA = m1[0].length,
+        rowsB = m2.length, colsB = m2[0].length;
+
+       const c = [];
+    if (colsA != rowsB) return false;
+    for (let i = 0; i < rowsA; i++) c[ i ] = [];
+    for (let k = 0; k < colsB; k++)
+     { for (let i = 0; i < rowsA; i++)
+        { let t = 0;
+          for (var j = 0; j < rowsB; j++) t += m1[ i ][j]*m2[j][k];
+          c[ i ][k] = t;
+        }
+     }
+    return c;
 }
 
 
