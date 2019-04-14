@@ -174,7 +174,13 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+    for (var i = 0; i < str.length; i++) {
+        var c = str.charAt(i);
+        if (str.indexOf(c) == i && str.indexOf(c, i + 1) == -1) {
+          return c;
+        }
+      }
+      return null;
 }
 
 
@@ -375,7 +381,11 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
+    const timeSpan = new Date(endDate - startDate);
+    
+    if(timeSpan.getSeconds() < 90 && timeSpan.getSeconds()> 45 ) return 'a minute ago';
+    if (timeSpan.getMilliseconds()>0 ||  timeSpan.getSeconds() <= 45 ) return 'a few seconds ago';
+    
 }
 
 
