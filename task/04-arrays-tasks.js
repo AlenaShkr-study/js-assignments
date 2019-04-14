@@ -104,7 +104,7 @@ function getArrayOfStrings(arr) {
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
 function removeFalsyValues(arr) {
-   return arr.filter((el) => (el !== undefined && el !== null && el !== false && el !== 0 && el.length !== 0 && !isNaN(el)));
+   return arr.filter( el => el);
 }
 
 /**
@@ -150,7 +150,8 @@ function getStringsLength(arr) {
  */
 function insertItem(arr, item, index) {
 
-   return arr = arr.slice(0, index).concat(item).concat(arr.slice(index));
+   return arr.slice(0, index).concat(item).concat(arr.slice(index));
+
 }
 
 /**
@@ -373,10 +374,10 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-   if (arr.length === 0) return 0;
-   let emptyValue = arr.length-arr.filter(el=> el).length;
-   let countFalsy=arr.filter((el) => (el === undefined || el === null || el === false || el === 0  || isNaN(el) )).length;
-   return  emptyValue+countFalsy;
+   let len= arr.length;
+   
+   let len2 = arr.filter(el => el).length;
+   return len-len2;
 }
 
 /**
@@ -439,7 +440,23 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  */
 function sortCitiesArray(arr) {
-    return arr.sort((a,b)=> a.country>b.country);
+   arr.sort(function(a, b){
+      let nameA=a.country.toLowerCase(), nameB=b.country.toLowerCase()
+   if (nameA < nameB) 
+   return -1;
+ if (nameA > nameB)
+   return 1;
+   return 0
+   })
+   return arr.sort((a, b)=>
+   {if (a.country === b.country)
+      {let nameA=a.city.toLowerCase(), nameB=b.city.toLowerCase()
+      if (nameA < nameB) 
+      return -1;
+    if (nameA > nameB)
+      return 1;
+      return 0
+      }})
     
 
 }
@@ -533,7 +550,11 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
-   throw new Error('Not implemented');
+   let result = array.reduce(function(h, keySelector) {
+      h[keySelector] = (array[keySelector] || []).concat(valueSelector);
+      return array; 
+    }, {});
+   return result;
 }
 
 
@@ -567,7 +588,8 @@ function selectMany(arr, childrenSelector) {
  */
 function getElementByIndexes(arr, indexes) {
    let len =indexes.length;
-   return 2;
+   
+   return arr[indexes];
    
 }
 

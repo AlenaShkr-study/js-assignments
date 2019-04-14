@@ -30,7 +30,11 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    if ((num % 3 === 0 ) && (num % 5 === 0)) return 'FizzBuzz';
+    if (num % 3 === 0 ) return 'Fizz';
+    if (num % 5 === 0) return 'Buzz';
+    
+    else return num;
 }
 
 
@@ -86,7 +90,7 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    return (a+b> c && b+c> a && c+a>b);
 }
 
 
@@ -154,7 +158,7 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+    return (circle.radius) > (Math.sqrt(Math.pow(point.x-circle.center.x,2)+Math.pow(point.y-circle.center.y,2)));
 }
 
 
@@ -213,7 +217,7 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    return str.split('').reverse().join('');
 }
 
 
@@ -230,7 +234,7 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    return +(String(num).split('').reverse().join(''));
 }
 
 
@@ -255,7 +259,14 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+    
+        return String(ccn).split('')
+            .reverse()
+            .map( (x) => parseInt(x) )
+            .map( (x,idx) => idx % 2 ? x * 2 : x )
+            .map( (x) => x > 9 ? (x % 10) + 1 : x )
+            .reduce( (accum, x) => accum += x ) % 10 === 0;
+    
 }
 
 
@@ -274,7 +285,10 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    if (num < 10) return num;
+  
+  return getDigitalRoot(num.toString()
+  .split('').reduce(function(acc, d) { return acc + +d; }, 0));
 }
 
 
@@ -300,7 +314,27 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+    const bracketsConfig =[['(',')'],['[',']'], ['{','}'], ['<','>'] ];
+    let copyStr = str;
+    const configLen = bracketsConfig.length;
+    
+    for ( let i = 0; i < copyStr.length;  i++) {
+      for (let j = 0; j < configLen; j++){
+        
+       if ((copyStr[i] === bracketsConfig[j][0]) && (copyStr[i + 1] === bracketsConfig[j][1])){
+  
+          let reg = bracketsConfig[j][0] + bracketsConfig[j][1];
+          copyStr = copyStr.replace(reg,'');
+  
+          i = i-1;
+          j = -1;
+        }
+      }
+    }
+  
+    return copyStr === '';
+  
+
 }
 
 
